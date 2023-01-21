@@ -1,12 +1,14 @@
 import { PageContainer, Form } from "./styled";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "../../components/Header/Header";
+import AuthContext from "../../contexts/AuthenticationContext";
 
 export default function CashDeposit() {
   const [value, setValue] = useState("");
   const [description, setDescription] = useState("");
+  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
   async function deposit(e) {
@@ -14,8 +16,14 @@ export default function CashDeposit() {
 
     const body = { value, description };
 
+    const config = { 
+      headers:{
+        authorization:`Bearer ${token}`
+      }
+    }
+
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/deposit`, body);
+      await axios.post(`${process.env.REACT_APP_API_URL}/deposit`, body, config);
       setValue("");
       setDescription("");
       navigate("/home");

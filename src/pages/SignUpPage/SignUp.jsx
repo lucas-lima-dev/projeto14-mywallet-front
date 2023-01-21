@@ -1,8 +1,9 @@
 import { PageContainer, Form, StyledLink } from "./styled";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../constants/urls";
+// import { BASE_URL } from "../../constants/urls";
 import axios from "axios";
+import UserContext from "../../contexts/UserContext";
 
 
 export default function SignUp() {
@@ -10,13 +11,14 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const {setUserName} = useContext(UserContext)
   const navigate = useNavigate();
   
 
-  function createAccount(event) {
+  async function createAccount(event) {
     event.preventDefault();
 
-    const URL = `${BASE_URL}/auth/sign-up`;
+    // const URL = `${BASE_URL}/auth/sign-up`;
 
     const body = {
       name,
@@ -25,18 +27,31 @@ export default function SignUp() {
       confirmPassword,
     };
 
-    axios
-      .post(URL, body)
-      .then((res) => {
-        alert("Cadastro realizado com sucesso");
-        navigate("/");
-        setName("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
-      })
+    try {
+      const {name} = await axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, body);
+      alert("Cadastro realizado com sucesso");
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setUserName(name)
+      navigate("/");
+    } catch (error) {
+      alert(error.response.data.message)
+    }
 
-      .catch((err) => alert(err.response.data.message));
+    // axios
+    //   .post(URL, body)
+    //   .then((res) => {
+    //     alert("Cadastro realizado com sucesso");
+    //     navigate("/");
+    //     setName("");
+    //     setEmail("");
+    //     setPassword("");
+    //     setConfirmPassword("");
+    //   })
+
+    //   .catch((err) => alert(err.response.data.message));
   }
 
   return (

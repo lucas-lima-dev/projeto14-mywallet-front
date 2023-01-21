@@ -1,41 +1,44 @@
 import { PageContainer, Form, StyledLink } from "./styled";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../../constants/urls";
 import axios from "axios";
 import AuthContext from "../../contexts/AuthenticationContext";
+import UserContext from "../../contexts/UserContext";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const { setToken } = useContext(AuthContext);
+  const {setUserName} = useContext(UserContext)
+  const navigate = useNavigate();
 
   async function login(e) {
     e.preventDefault();
-    const URL = `${BASE_URL}/auth/login`;
+    // const URL = `${BASE_URL}/auth/login`;
 
     const body = { email, password };
 
     
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/`, body);
+      const {token,name} = await axios.post(`${process.env.REACT_APP_API_URL}/`, body);
       setEmail("");
       setPassword("");
+      setToken(token)
+      setUserName(name)
       navigate("/home");
     } catch (error) {
       alert(error.response.data.message);
     }
-    axios
-      .post(URL, body)
-      .then((res) => {
-        setToken(res.data.token);
-        navigate("/home");
-        setEmail("");
-        setPassword("");
-      })
+    // axios
+    //   .post(URL, body)
+    //   .then((res) => {
+    //     setToken(res.data.token);
+    //     navigate("/home");
+    //     setEmail("");
+    //     setPassword("");
+    //   })
 
-      .catch((err) => alert(err.response.data.message));
+    //   .catch((err) => alert(err.response.data.message));
   }
 
   return (

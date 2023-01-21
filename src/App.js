@@ -11,11 +11,11 @@ import Home from "./pages/HomePage/Home";
 
 export default function App() {
     const [token, setToken] = useState("");
-    const [userImg, setUserImg] = useState("");
+    const [userName, setUserName] = useState("");
     return (
       <StyledApp>
         <AuthContext.Provider value={{ token, setToken }}>
-          <UserContext.Provider value={{userImg,setUserImg}}>
+          <UserContext.Provider value={{userName,setUserName}}>
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<SignIn />} />

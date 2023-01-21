@@ -23,7 +23,7 @@ export default function CashWithdraw() {
     }
 
     try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/deposit`, body, config);
+      await axios.post(`${process.env.REACT_APP_API_URL}/wallet`, body, config);
       setValue("");
       setDescription("");
       navigate("/home");

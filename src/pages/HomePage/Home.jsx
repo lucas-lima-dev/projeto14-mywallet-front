@@ -10,7 +10,7 @@ import {
 } from "./styled";
 import { Link } from "react-router-dom";
 import CashInfo from "../../components/CashInfo/CashInfo";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useMemo } from "react";
 import UserContext from "../../contexts/UserContext";
 import AuthContext from "../../contexts/AuthenticationContext";
 import axios from "axios";
@@ -19,13 +19,17 @@ export default async function Home() {
   const { token } = useContext(AuthContext);
   const { userName } = useContext(UserContext);
   const [wallet, setWallet] = useState([]);
+  const config = useMemo(()=>{
+    return {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      };
+  },[token])
+  
 
   useEffect(() => {
-    const config = {
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    };
+    
 
     try {
       const wallet = async () => {
@@ -36,7 +40,7 @@ export default async function Home() {
     } catch (error) {
       alert(error.response.data.message);
     }
-  }, []);
+  }, [config]);
 
   return (
     <PageContainer>

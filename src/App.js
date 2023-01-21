@@ -18,11 +18,11 @@ export default function App() {
           <UserContext.Provider value={{userImg,setUserImg}}>
             <BrowserRouter>
               <Routes>
-                {/* <Route path="/" element={<SignIn />} /> */}
-                {/* <Route path="/sign-up" element={<SignUp />} /> */}
+                <Route path="/" element={<SignIn />} />
+                <Route path="/sign-up" element={<SignUp />} />
                 <Route path="/home" element={<Home/>} />
-                {/* <Route path="/deposit" element={<CashDeposit/>} /> */}
-                {/* <Route path="/withdraw" element={<CashWithdraw/>} /> */}
+                <Route path="/deposit" element={<CashDeposit/>} />
+                <Route path="/withdraw" element={<CashWithdraw/>} />
               </Routes>
             </BrowserRouter>
           </UserContext.Provider>

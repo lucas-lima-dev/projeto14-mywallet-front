@@ -15,6 +15,21 @@ export const CashFlowUserInfo = styled.div`
   border-radius: 5px;
   margin: 0px 25px 13px 25px;
   /*  topo | direita | inferior | esquerda*/
+  position: relative;
+  h1{
+    
+    width:180px;
+font-family: 'Raleway';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+text-align: center;
+color: #868686;
+position: absolute;
+top:200px;
+left:73px;
+  }
 `;
 
 export const CashFlowContainer = styled.div`

@@ -1,35 +1,12 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const PageContainer = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
   background: #8c11be;
   min-height: 100vh;
-  h1 {
-    font-family: "Saira Stencil One";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 50px;
-    color: #ffffff;
-    margin-top: 159px;
-  }
-
-  p {
-    margin-top: 25px;
-    font-family: "Raleway";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13.976px;
-    line-height: 17px;
-    text-align: center;
-    text-decoration-line: underline;
-
-    color: #52b6ff;
-    cursor: pointer;
-  }
+  
 `;
 
 export const Form = styled.form`
@@ -79,17 +56,5 @@ export const Form = styled.form`
     text-align: center;
 
     color: #ffffff;
-  }
-`;
-
-export const StyledLink = styled(Link)`
-  p {
-    font-size: 15px;
-    font-family: "Raleway";
-    line-height: 18px;
-    font-weight: 700;
-    text-decoration: none;
-    color: #ffffff;
-    cursor: pointer;
   }
 `;

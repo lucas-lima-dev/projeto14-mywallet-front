@@ -19,14 +19,13 @@ export const PageContainer = styled.div`
 
   p {
     margin-top: 25px;
-    font-family: "Raleway";
+    font-family: "Lexend Deca";
     font-style: normal;
     font-weight: 400;
     font-size: 13.976px;
     line-height: 17px;
     text-align: center;
     text-decoration-line: underline;
-
     color: #52b6ff;
     cursor: pointer;
   }
@@ -48,7 +47,6 @@ export const Form = styled.form`
     border-radius: 5px;
     margin-bottom: 13px;
     position: relative;
-
     ::placeholder {
       font-family: "Raleway";
       font-style: normal;
@@ -58,7 +56,6 @@ export const Form = styled.form`
       position: absolute;
       top: 16px;
       left: 15px;
-
       color: #000000;
     }
   }
@@ -77,7 +74,6 @@ export const Form = styled.form`
     font-size: 20.976px;
     line-height: 26px;
     text-align: center;
-
     color: #ffffff;
   }
 `;

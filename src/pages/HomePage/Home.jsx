@@ -15,10 +15,15 @@ import UserContext from "../../contexts/UserContext";
 import AuthContext from "../../contexts/AuthenticationContext";
 import axios from "axios";
 
-export default async function Home() {
+
+export default function Home() {
   const { token } = useContext(AuthContext);
+  
   const { userName } = useContext(UserContext);
+  
+  
   const [wallet, setWallet] = useState([]);
+  
   const config = useMemo(()=>{
     return {
         headers: {
@@ -30,13 +35,15 @@ export default async function Home() {
 
   useEffect(() => {
     
+    const getWalletInfo = async ()=>{
+      const {data} = await axios.get(`${process.env.REACT_APP_API_URL}/home`,config)
+      console.log(data)
+      setWallet(data)
+      
+    }
 
     try {
-      const wallet = async () => {
-        await axios.get(`${process.env.REACT_APP_API_URL}/home`, config);
-      };
-
-      setWallet(wallet);
+      getWalletInfo()
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -45,7 +52,8 @@ export default async function Home() {
   return (
     <PageContainer>
       <Header>
-        <h1>`Olá, ${userName}`</h1>
+      {/* <h1>Olá, Fulano</h1> */}
+        <h1>Olá, {userName}</h1>
       </Header>
 
       <Link to={"/"}>
@@ -53,11 +61,12 @@ export default async function Home() {
       </Link>
 
       <CashFlowUserInfo>
-        {wallet ? (
+        {wallet.length>0 ? (
           <CashInfo wallet={wallet} />
         ) : (
           <h1>Não há registros de entrada ou saída</h1>
         )}
+        
       </CashFlowUserInfo>
       <CashFlowContainer>
         <Link to={"/deposit"}>
@@ -82,3 +91,4 @@ export default async function Home() {
     </PageContainer>
   );
 }
+

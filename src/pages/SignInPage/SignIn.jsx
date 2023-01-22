@@ -14,18 +14,19 @@ export default function SignIn() {
 
   async function login(e) {
     e.preventDefault();
-    // const URL = `${BASE_URL}/auth/login`;
+    
 
     const body = { email, password };
 
     
     try {
-      const {token,name} = await axios.post(`${process.env.REACT_APP_API_URL}/`, body);
+      const {data:{token,name}} = await axios.post(`${process.env.REACT_APP_API_URL}/`, body);
+
       setEmail("");
       setPassword("");
       setToken(token)
       setUserName(name)
-      navigate("/home");
+      navigate("/home")
     } catch (error) {
       alert(error.response.data.message);
     }

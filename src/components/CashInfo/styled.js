@@ -32,7 +32,6 @@ line-height: 19px;
 color: #000000;
 `
 export const Value = styled.p`
-/* margin-left:110px; */
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 400;
@@ -40,6 +39,7 @@ font-size: 16px;
 line-height: 19px;
 position:absolute;
 right:11px;
+color: ${props => props.type === 'entry' ? "#03AC00" : "#C70000"};
 
 `
 
@@ -47,7 +47,7 @@ export const TotalContainer = styled.div`
 
 display:flex;
 position:fixed;
-bottom:445px;
+bottom:440px;
 `
 export const Saldo = styled.p`
 margin-left:12px;
@@ -60,7 +60,7 @@ line-height: 20px;
 color: #000000;
 `
 export const Valor = styled.p`
-margin-left:180px;
+margin-left:210px;
 font-family: 'Raleway';
 font-style: normal;
 font-weight: 400;
@@ -68,5 +68,5 @@ font-size: 17px;
 line-height: 20px;
 
 
-color: #03AC00;
+color: ${props => props.total > 0 ? "#03AC00" : "#C70000"};
 `

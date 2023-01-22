@@ -14,7 +14,7 @@ export default function CashDeposit() {
   async function deposit(e) {
     e.preventDefault();
 
-    const body = { value, description };
+    const body = { value, description,type:"entry" };
 
     const config = { 
       headers:{
@@ -28,7 +28,7 @@ export default function CashDeposit() {
       setDescription("");
       navigate("/home");
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response.data);
     }
   }
 
@@ -40,6 +40,7 @@ export default function CashDeposit() {
       <Form onSubmit={deposit}>
         <input
           type="number"
+          min = {0}
           placeholder="Valor"
           value={value}
           onChange={(e) => setValue(e.target.value)}

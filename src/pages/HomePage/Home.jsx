@@ -19,7 +19,9 @@ import axios from "axios";
 export default function Home() {
   const { token } = useContext(AuthContext);
   
+  
   const { userName } = useContext(UserContext);
+  
   
   
   const [wallet, setWallet] = useState([]);
@@ -37,7 +39,7 @@ export default function Home() {
     
     const getWalletInfo = async ()=>{
       const {data} = await axios.get(`${process.env.REACT_APP_API_URL}/home`,config)
-      console.log(data)
+      
       setWallet(data)
       
     }
@@ -45,14 +47,14 @@ export default function Home() {
     try {
       getWalletInfo()
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response.data);
     }
   }, [config]);
 
   return (
     <PageContainer>
       <Header>
-      {/* <h1>Olá, Fulano</h1> */}
+      
         <h1>Olá, {userName}</h1>
       </Header>
 

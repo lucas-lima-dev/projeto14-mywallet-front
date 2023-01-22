@@ -47,7 +47,7 @@ export const TotalContainer = styled.div`
 
 display:flex;
 position:fixed;
-bottom:440px;
+bottom:165px;
 `
 export const Saldo = styled.p`
 margin-left:12px;

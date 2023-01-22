@@ -28,7 +28,7 @@ export default function CashWithdraw() {
       setDescription("");
       navigate("/home");
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response.data);
     }
   }
 

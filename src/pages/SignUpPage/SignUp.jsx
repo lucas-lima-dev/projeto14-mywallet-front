@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import { BASE_URL } from "../../constants/urls";
 import axios from "axios";
+import {ThreeDots} from "react-loader-spinner"
+
 
 
 
@@ -11,13 +13,14 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading,setIsLoading] = useState(false)
   
   const navigate = useNavigate();
   
 
   async function createAccount(event) {
     event.preventDefault();
-
+    setIsLoading(true)
     // const URL = `${BASE_URL}/auth/sign-up`;
 
     const body = {
@@ -31,6 +34,7 @@ export default function SignUp() {
       await axios.post(`${process.env.REACT_APP_API_URL}/sign-up`, body);
       
       alert("Cadastro realizado com sucesso");
+      setIsLoading(false)
       setName("");
       setEmail("");
       setPassword("");
@@ -65,6 +69,7 @@ export default function SignUp() {
           placeholder="Nome"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          disabled={isLoading}
           required
         />
         <input
@@ -73,6 +78,7 @@ export default function SignUp() {
           placeholder="E-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isLoading}
           required
         />
         <input
@@ -81,6 +87,7 @@ export default function SignUp() {
           placeholder="Senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isLoading}
           required
         />
         <input
@@ -89,10 +96,13 @@ export default function SignUp() {
           placeholder="Confirme a senha"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          disabled={isLoading}
           required
         />
-        <button type="submit" >
-          Cadastrar
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <ThreeDots width={50} color="#FFFFFF"/>
+          ) : "Cadastrar"}
         </button>
       </Form>
 

@@ -4,16 +4,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import AuthContext from "../../contexts/AuthenticationContext";
 import UserContext from "../../contexts/UserContext";
+import {ThreeDots} from "react-loader-spinner"
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { setToken } = useContext(AuthContext);
   const {setUserName} = useContext(UserContext)
+  const [isLoading,setIsLoading] = useState(false)
   const navigate = useNavigate();
 
   async function login(e) {
     e.preventDefault();
+    setIsLoading(true)
     
 
     const body = { email, password };
@@ -23,6 +26,7 @@ export default function SignIn() {
       const {data:{token,name}} = await axios.post(`${process.env.REACT_APP_API_URL}/`, body);
       setToken(token)
       setUserName(name)
+      setIsLoading(false)
       setEmail("");
       setPassword("");
       navigate("/home")
@@ -51,6 +55,7 @@ export default function SignIn() {
           placeholder="E-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isLoading}
           required
         />
         <input
@@ -58,9 +63,14 @@ export default function SignIn() {
           placeholder="Senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isLoading}
           required
         />
-        <button type="submit">Entrar</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <ThreeDots width={50} color="#FFFFFF"/>
+          ) : "Entrar"}
+          </button>
       </Form>
       <StyledLink to={"/sign-up"}>
         <p>Primeira vez? Cadastre-se!</p>

@@ -63,6 +63,9 @@ export const Form = styled.form`
     }
   }
   button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     align-self: center;
     width: 326px;
     height: 46px;
@@ -70,6 +73,8 @@ export const Form = styled.form`
     border-radius: 4.63636px;
     border: none;
     cursor: pointer;
+    pointer-events: ${(props) => (props.disabled ? "none" : "all")};
+    opacity: ${(props) => (props.disabled ? 0.7 : 1)};
 
     font-family: "Raleway";
     font-style: normal;
@@ -77,7 +82,6 @@ export const Form = styled.form`
     font-size: 20.976px;
     line-height: 26px;
     text-align: center;
-
     color: #ffffff;
   }
 `;
